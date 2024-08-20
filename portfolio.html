@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Redintek Portfolio</title>
+  <!-- Include A-Frame for 3D elements -->
+  <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+  <style>
+    /* General styles */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+      scroll-behavior: smooth; /* Smooth scrolling */
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    /* Navbar styles */
+    .navbar {
+      background-color: #333;
+      padding: 1rem;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .navbar__list {
+      list-style-type: none;
+      display: flex;
+      justify-content: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar__item {
+      margin: 0 15px;
+    }
+
+    .navbar__item a {
+      color: white;
+      text-decoration: none;
+    }
+
+    /* Section styles */
+    .hero {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #282c34;
+      margin-top: 60px; /* Adjust for fixed navbar */
+    }
+
+    .about, .services, .portfolio, .contact {
+      padding: 50px 20px;
+      background-color: #fff;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .services ul {
+      list-style-type: none;
+      padding: 0;
+      text-align: center;
+    }
+
+    .services ul li {
+      margin: 10px 0;
+    }
+
+    .portfolio__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .portfolio__item {
+      background-color: #ddd;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .contact__form {
+      display: flex;
+      flex-direction: column;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .contact__form label {
+      margin: 10px 0;
+    }
+
+    .contact__form input, .contact__form textarea {
+      padding: 10px;
+      font-size: 16px;
+      width: 100%;
+    }
+
+    .contact__form button {
+      padding: 10px;
+      background-color: #333;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    .footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 10px 0;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <ul class="navbar__list">
+      <li class="navbar__item"><a href="#home">Home</a></li>
+      <li class="navbar__item"><a href="#about">About</a></li>
+      <li class="navbar__item"><a href="#services">Services</a></li>
+      <li class="navbar__item"><a href="#portfolio">Portfolio</a></li>
+      <li class="navbar__item"><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero Section with 3D model -->
+  <section id="home" class="hero">
+    <a-scene embedded>
+      <a-box id="rotatingBox" position="0 1 -5" rotation="0 45 0" color="#4CC3D9" shadow></a-box>
+      <a-sky color="#ECECEC"></a-sky>
+    </a-scene>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="about">
+    <h2>About Us</h2>
+    <p>Redintek is a leading technology company specializing in innovative solutions...</p>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services" class="services">
+    <h2>Our Services</h2>
+    <ul>
+      <li>Web Development</li>
+      <li>Mobile Applications</li>
+      <li>Cloud Solutions</li>
+      <li>3D Modeling & VR</li>
+    </ul>
+  </section>
+
+  <!-- Portfolio Section -->
+  <section id="portfolio" class="portfolio">
+    <h2>Our Portfolio</h2>
+    <div class="portfolio__grid">
+      <!-- Portfolio items go here -->
+      <div class="portfolio__item">Project 1</div>
+      <div class="portfolio__item">Project 2</div>
+      <div class="portfolio__item">Project 3</div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="contact">
+    <h2>Contact Us</h2>
+    <form class="contact__form">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name">
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email">
+
+      <label for="message">Message:</label>
+      <textarea id="message" name="message"></textarea>
+
+      <button type="submit">Send</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>© 2024 Redintek. All rights reserved.</p>
+  </footer>
+
+  <!-- JavaScript for interactivity -->
+  <script>
+    // Smooth scrolling for navbar links
+    document.querySelectorAll('.navbar__item a').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+
+    // Simple animation for the 3D box in A-Frame
+    const box = document.getElementById('rotatingBox');
+    let rotation = 0;
+
+    function rotateBox() {
+      rotation += 1;
+      box.setAttribute('rotation', { x: 0, y: rotation, z: 0 });
+      requestAnimationFrame(rotateBox);
+    }
+
+    rotateBox();
+  </script>
+</body>
+</html>
